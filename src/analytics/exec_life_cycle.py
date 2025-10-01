@@ -1,4 +1,5 @@
 # %%
+
 import pandas as pd
 import sqlalchemy
 
@@ -11,8 +12,9 @@ def import_query(path):
     return query
 
 
-query = import_query("lifecycle.sql")
+query = import_query("life_cycle.sql")
 
+# %%
 
 engine_app = sqlalchemy.create_engine("sqlite:///../../data/loyalty-system/database.db")
 engine_analytical = sqlalchemy.create_engine(
@@ -22,6 +24,8 @@ engine_analytical = sqlalchemy.create_engine(
 # %%
 
 dates = [
+    "2024-03-01",
+    "2024-04-01",
     "2024-05-01",
     "2024-06-01",
     "2024-07-01",
@@ -44,10 +48,13 @@ dates = [
 for i in dates:
 
     with engine_analytical.connect() as con:
-        query_delete = f"DELETE FROM life_cycle WHERE dtRef = date('{i}', '-1 day')"
-        print(query_delete)
-        con.execute(sqlalchemy.text(query_delete))
-        con.commit()
+        try:
+            query_delete = f"DELETE FROM life_cycle WHERE dtRef = date('{i}', '-1 day')"
+            print(query_delete)
+            con.execute(sqlalchemy.text(query_delete))
+            con.commit()
+        except Exception as err:
+            print(err)
 
     print(i)
     query_format = query.format(date=i)
