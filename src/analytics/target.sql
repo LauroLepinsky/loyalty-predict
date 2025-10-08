@@ -1,4 +1,4 @@
-CREATE TABLE abt_fiel AS WITH tb_join AS (
+CREATE TABLE IF NOT EXISTS abt_fiel AS WITH tb_join AS (
     SELECT t1.dtRef,
         t1.IdCliente,
         t1.descLifeCycle,

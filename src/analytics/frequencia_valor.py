@@ -61,11 +61,7 @@ df.groupby(by="cluster_calc")["IdCliente"].count()
 import seaborn as sns
 
 sns.scatterplot(
-    data=df,
-    x="qtdeFrequencia",
-    y="qtdePontosPos",
-    hue="cluster_calc",
-    palette="deep",
+    data=df, x="qtdeFrequencia", y="qtdePontosPos", hue="cluster_calc", palette="deep"
 )
 
 plt.hlines(y=1500, xmin=0, xmax=25, colors="black")
@@ -77,11 +73,7 @@ plt.grid()
 # %%
 
 sns.scatterplot(
-    data=df,
-    x="qtdeFrequencia",
-    y="qtdePontosPos",
-    hue="cluster",
-    palette="deep",
+    data=df, x="qtdeFrequencia", y="qtdePontosPos", hue="cluster", palette="deep"
 )
 
 plt.grid()
